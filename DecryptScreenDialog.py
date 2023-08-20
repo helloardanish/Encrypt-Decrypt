@@ -51,7 +51,7 @@ class DecryptScreenDialog(QDialog):
 
 
         # Create the close window button
-        self.close_button = QPushButton("Close Window", self)
+        self.close_button = QPushButton("Close", self)
         #self.close_button.clicked.connect(self.close)
         self.close_button.clicked.connect(self.accept)
         layout.addWidget(self.close_button)
@@ -103,14 +103,18 @@ class DecryptScreenDialog(QDialog):
         #cipher_suite = Fernet(my_key)
         #encrypted_text = text1.encode("utf-8")
         #encrypted_text = text1
-
+ 
         #decrypted_text = self.decryptMessage(text1)
         
         #decrypted_text = cipher_suite.decrypt(encrypted_text)
         #self.text_decrypted.setPlainText(decrypted_text.decode("utf-8"))  # Copy text from text_editor1 to text_editor2
 
-        decrypted_text = self.decryptMessage(text1)
-        self.text_decrypted.setPlainText(decrypted_text)  # Copy text from text_editor1 to text_editor2
+        if text1:
+            decrypted_text = self.decryptMessage(text1)
+            self.text_decrypted.setPlainText(decrypted_text)  # Copy text from text_editor1 to text_editor2
+            pyperclip.copy(self.text_decrypted.toPlainText()) #copied automatically
+        else:
+            self.text_decrypted.setPlainText("")
 
 
         
