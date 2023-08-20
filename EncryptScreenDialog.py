@@ -57,7 +57,7 @@ class EncryptScreenDialog(QDialog):
         #central_widget.setLayout(layout)
 
         # Set the text limit (adjust this limit as needed)
-        self.text_limit1 = 100
+        self.text_limit1 = 10000
 
         self.setLayout(layout)
 
