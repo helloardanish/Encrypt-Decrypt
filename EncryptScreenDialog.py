@@ -49,7 +49,7 @@ class EncryptScreenDialog(QDialog):
         layout.addWidget(self.copy_button)
 
         # Create the close window button
-        self.close_button = QPushButton("Close Window", self)
+        self.close_button = QPushButton("Close", self)
         #self.close_button.clicked.connect(self.close)
         self.close_button.clicked.connect(self.accept)
         layout.addWidget(self.close_button)
@@ -79,6 +79,15 @@ class EncryptScreenDialog(QDialog):
         msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg_box.exec()
 
+
+    def show_alert_message(self, message, description):
+        msg_box = QMessageBox()
+        msg_box.setWindowTitle(message)
+        msg_box.setIcon(QMessageBox.Icon.Information)
+        msg_box.setText(description)
+        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg_box.exec()
+
     def check_text_limit(self):
         # Get the current text from the QPlainTextEdit
         current_text = self.text_to_be_encrypted.toPlainText()
@@ -105,11 +114,15 @@ class EncryptScreenDialog(QDialog):
         # The message to encrypt
         #message = text1.encode("utf-8")
 
-        # Encrypt the message
-        encrypted_text = self.encryptMessage(text1)
-        #print("Encrypted Text:", encrypted_text)
+        if text1:
+            # Encrypt the message
+            encrypted_text = self.encryptMessage(text1)
+            #print("Encrypted Text:", encrypted_text)
 
-        self.text_encrypted.setPlainText(encrypted_text.decode("utf-8"))  # Copy text from text_editor1 to text_editor2
+            self.text_encrypted.setPlainText(encrypted_text.decode("utf-8"))  # Copy text from text_editor1 to text_editor2
+            pyperclip.copy(self.text_encrypted.toPlainText()) #copied automatically
+        else:
+            self.text_encrypted.setPlainText("")
 
 
 
