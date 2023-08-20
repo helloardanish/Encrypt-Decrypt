@@ -59,7 +59,7 @@ class DecryptScreenDialog(QDialog):
         #central_widget.setLayout(layout)
 
         # Set the text limit (adjust this limit as needed)
-        self.text_limit1 = 1000
+        self.text_limit1 = 10000
         self.setLayout(layout)
 
     def decryptMessage(self, encrypted_text):
