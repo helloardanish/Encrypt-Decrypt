@@ -25,7 +25,7 @@ class EncryptScreenDialog(QDialog):
         self.text_to_be_encrypted.setPlaceholderText("Enter text to encrypt.")
         self.text_to_be_encrypted.setFixedWidth(400)  # Set custom width
         self.text_to_be_encrypted.setFixedHeight(300)  # Set custom height
-        self.text_to_be_encrypted.textChanged.connect(self.check_text_limit)  # Connect to custom slot
+        self.text_to_be_encrypted.textChanged.connect(self.check_encrypt_text_limit)  # Connect to custom slot
         layout.addWidget(self.text_to_be_encrypted)
 
 
@@ -88,14 +88,16 @@ class EncryptScreenDialog(QDialog):
         msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg_box.exec()
 
-    def check_text_limit(self):
+    def check_encrypt_text_limit(self):
         # Get the current text from the QPlainTextEdit
         current_text = self.text_to_be_encrypted.toPlainText()
+        print(f"current text : {current_text}")
         
         # Check if the text exceeds the limit
         if len(current_text) > self.text_limit1:
             # Trim the text to the limit
-            self.text_to_be_encrypted.setPlainText(current_text[:self.text_limit1])
+            #self.text_to_be_encrypted.setPlainText(current_text[:self.text_limit1])
+            self.text_to_be_encrypted.setPlainText(current_text[:-1])
 
 
 
@@ -139,3 +141,4 @@ if __name__ == "__main__":
     sys.exit(app.exec())
 
 '''
+
