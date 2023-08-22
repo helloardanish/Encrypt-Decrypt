@@ -25,7 +25,7 @@ class DecryptScreenDialog(QDialog):
         self.text_to_be_decrypted.setPlaceholderText("Enter text to decrypt.")
         self.text_to_be_decrypted.setFixedWidth(400)  # Set custom width
         self.text_to_be_decrypted.setFixedHeight(300)  # Set custom height
-        self.text_to_be_decrypted.textChanged.connect(self.check_text_limit)  # Connect to custom slot
+        self.text_to_be_decrypted.textChanged.connect(self.check_decrypt_text_limit)  # Connect to custom slot
         layout.addWidget(self.text_to_be_decrypted)
 
 
@@ -83,14 +83,15 @@ class DecryptScreenDialog(QDialog):
         msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg_box.exec()
 
-    def check_text_limit(self):
+    def check_decrypt_text_limit(self):
         # Get the current text from the QPlainTextEdit
         current_text = self.text_to_be_decrypted.toPlainText()
         
         # Check if the text exceeds the limit
         if len(current_text) > self.text_limit1:
             # Trim the text to the limit
-            self.text_to_be_decrypted.setPlainText(current_text[:self.text_limit1])
+            #self.text_to_be_decrypted.setPlainText(current_text[:self.text_limit1])
+            self.text_to_be_decrypted.setPlainText(current_text[:-1])
 
 
 
